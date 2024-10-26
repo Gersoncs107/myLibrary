@@ -5,25 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- Formulário para adicionar um novo livro -->
-<form id="bookForm" onsubmit="addBookToLibrary(); event.preventDefault();">
-    <label for="title">Título:</label>
-    <input type="text" id="title" name="title" required>
-  
-    <label for="author">Autor:</label>
-    <input type="text" id="author" name="author" required>
-  
-    <label for="pages">Número de Páginas:</label>
-    <input type="number" id="pages" name="pages" required min="1">
-  
-    <label for="read">Já foi lido?</label>
-    <input type="checkbox" id="read" name="read">
-  
-    <button type="submit">Adicionar Livro</button>
-  </form>
+
   
 </head>
 <body>
-    
+        <!-- Formulário para adicionar um novo livro -->
+<form id="bookForm" onsubmit="addBookToLibrary(); event.preventDefault();">
+  <label for="title">Título:</label>
+  <input type="text" id="title" name="title" required>
+
+  <label for="author">Autor:</label>
+  <input type="text" id="author" name="author" required>
+
+  <label for="pages">Número de Páginas:</label>
+  <input type="number" id="pages" name="pages" required min="1">
+
+  <label for="read">Já foi lido?</label>
+  <input type="checkbox" id="read" name="read">
+
+  <button type="submit" id="btn">Adicionar Livro</button>
+</form>
+
+
+  <script src="books.js"></script>
 </body>
 </html>

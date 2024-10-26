@@ -27,6 +27,8 @@ function addBookToLibrary(){
 
 }
 
+const button = document.getElementById('btn')
+button.addEventListener('submit', addBookToLibrary)
 
 const livro1 = new Books('Dias melhores virão', 'Max Lucado', 96, 'Lido')
 const livro2 = new Books('O fim da ansiedade', 'Max Lucado', 223, 'Não Lido')
