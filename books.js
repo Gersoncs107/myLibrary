@@ -19,11 +19,13 @@ function addBookToLibrary(){
    const newBook = new Book(title, author, pages, read)
 
    myLibrary.push(newBook)
+   displayLibrary()
 
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("pages").value = '';
     document.getElementById("read").checked = false;
+
 
 }
 
@@ -32,17 +34,50 @@ function displayLibrary(){
     display.innerHTML = ""
 
     myLibrary.forEach( (book, index) => {
+        const bookCard = document.createElement("div")
+        bookCard.classList.add("book-card")
 
+        const title = document.createElement("p")
+        title.textContent = `Título: ${book.title}`
+        bookCard.appendChild(title)
+
+        const author = document.createElement("p")
+        author.textContent = `Autor: ${book.author}`
+        bookCard.appendChild(author)
+
+        const pages = document.createElement("p")
+        pages.textContent = `Páginas: ${book.pages}`
+        bookCard.appendChild(pages)
+
+        const readStatus = document.createElement("p")
+        readStatus.textContent = `Lido: ${book.read? 'sim' : 'não'}`
+        bookCard.appendChild(readStatus)
+
+        const removeButton = document.createElement("button")
+        removeButton.textContent = "Remover"
+        removeButton.addEventListener('click', () => {
+            myLibrary.splice(index, 1)
+
+            displayLibrary()
+        })
+        bookCard.appendChild(removeButton)
+
+        const toggleReadButton = document.createElement("button")
+        toggleReadButton.textContent = "Alterar status da leitura"
+        toggleReadButton.addEventListener("click", () => {
+            book.read = ! book.read
+            displayLibrary()
+        })
+        bookCard.appendChild(toggleReadButton)
+
+        display.appendChild(bookCard)
     })
 }
 
+displayLibrary()
+
 const button = document.getElementById('btn')
-button.addEventListener('submit', addBookToLibrary)
+button.addEventListener('submit', displayLibrary)
 
-const livro1 = new Books('Dias melhores virão', 'Max Lucado', 96, 'Lido')
-const livro2 = new Books('O fim da ansiedade', 'Max Lucado', 223, 'Não Lido')
-
-addBookToLibrary(livro1)
-addBookToLibrary(livro2)
 
 console.log(myLibrary)
