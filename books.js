@@ -1,8 +1,8 @@
 const myLibrary = []
 
 function Book(title, author, pages, read){
-    this.title = title,
-    this.author = author,
+    this.title = title
+    this.author = author
     this.pages = pages
     this.read = read
     this.info = () => {
@@ -25,6 +25,15 @@ function addBookToLibrary(){
     document.getElementById("pages").value = '';
     document.getElementById("read").checked = false;
 
+}
+
+function displayLibrary(){
+    const display = getElementById("libraryDisplay")
+    display.innerHTML = ""
+
+    myLibrary.forEach( (book, index) => {
+
+    })
 }
 
 const button = document.getElementById('btn')
