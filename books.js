@@ -30,7 +30,7 @@ function addBookToLibrary(){
 }
 
 function displayLibrary(){
-    const display = getElementById("libraryDisplay")
+    const display = document.getElementById("libraryDisplay")
     display.innerHTML = ""
 
     myLibrary.forEach( (book, index) => {
@@ -77,7 +77,7 @@ function displayLibrary(){
 displayLibrary()
 
 const button = document.getElementById('btn')
-button.addEventListener('submit', displayLibrary)
+button.addEventListener('submit', addBookToLibrary)
 
 
 console.log(myLibrary)
