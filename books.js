@@ -19,6 +19,7 @@ function addBookToLibrary(){
    const newBook = new Book(title, author, pages, read)
 
    myLibrary.push(newBook)
+   saveLibrary()
    displayLibrary()
 
     document.getElementById("title").value = '';
@@ -57,7 +58,7 @@ function displayLibrary(){
         removeButton.textContent = "Remover"
         removeButton.addEventListener('click', () => {
             myLibrary.splice(index, 1)
-
+            saveLibrary()
             displayLibrary()
         })
         bookCard.appendChild(removeButton)
@@ -66,6 +67,7 @@ function displayLibrary(){
         toggleReadButton.textContent = "Alterar status da leitura"
         toggleReadButton.addEventListener("click", () => {
             book.read = ! book.read
+            saveLibrary()
             displayLibrary()
         })
         bookCard.appendChild(toggleReadButton)
@@ -73,6 +75,18 @@ function displayLibrary(){
         display.appendChild(bookCard)
     })
 }
+
+function saveLibrary(){
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
+function loadLibrary(){
+    const storedLibrary = localStorage.getItem('myLibrary')
+    if(storedLibrary){
+        myLibrary = JSON.parse(storedLibrary)
+    }
+}
+
 
 displayLibrary()
 
