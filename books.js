@@ -83,12 +83,16 @@ function saveLibrary(){
 function loadLibrary(){
     const storedLibrary = localStorage.getItem('myLibrary')
     if(storedLibrary){
-        myLibrary = JSON.parse(storedLibrary)
+        // myLibrary = JSON.parse(storedLibrary)
+        myLibrary.push(...JSON.parse(storedLibrary))
     }
 }
 
+window.onload = function(){
+    loadLibrary()
+    displayLibrary()
+}
 
-displayLibrary()
 
 const button = document.getElementById('btn')
 button.addEventListener('submit', addBookToLibrary)
