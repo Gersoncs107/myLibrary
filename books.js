@@ -1,4 +1,5 @@
-const myLibrary = []
+(function(){
+    const myLibrary = []
 
 function Book(title, author, pages, read){
     this.title = title
@@ -83,8 +84,12 @@ function saveLibrary(){
 function loadLibrary(){
     const storedLibrary = localStorage.getItem('myLibrary')
     if(storedLibrary){
-        // myLibrary = JSON.parse(storedLibrary)
-        myLibrary.push(...JSON.parse(storedLibrary))
+        try{
+            // myLibrary = JSON.parse(storedLibrary)
+            myLibrary.push(...JSON.parse(storedLibrary))
+        }catch(error){
+            console.error('Erro ao carregar a biblioteca do localStorage:', error)
+        }
     }
 }
 
@@ -95,7 +100,9 @@ window.onload = function(){
 
 
 const button = document.getElementById('btn')
-button.addEventListener('submit', addBookToLibrary)
+button.addEventListener('click', addBookToLibrary)
 
 
 console.log(myLibrary)
+})();
+

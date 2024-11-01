@@ -2,16 +2,21 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #c3c3d1;
     color: #333;
     margin: 0;
     padding: 20px;
   }
   
   h1 {
-    color: #4a4a4a;
+    color: hsl(0, 0%, 29%);
   }
   
+
+#container {
+  background: linear-gradient(to right, #a2dfe7, #91d6e9);
+  /* Outras propriedades de estilo para o container */
+}
   .book-card {
     border: 1px solid #ddd;
     padding: 15px;
@@ -41,46 +46,4 @@ body {
   }
   /* CSS Form */
   
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
   
-  .form-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .form-group {
-    flex: 1 1 300px; /* Ajustar a largura mínima conforme necessário */
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Responsividade: ajustar para telas menores */
-  @media (max-width: 768px) {
-    .form-group {
-      flex: 1 1 100%; /* Cada elemento ocupará 100% da largura */
-    }
-  }
