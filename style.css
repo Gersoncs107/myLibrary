@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #c3c3d1;
+    background-color: #c6c6c9;
     color: #333;
     margin: 0;
     padding: 20px;
@@ -14,10 +14,11 @@ body {
   
 
 #container {
-  background: linear-gradient(to right, #a2dfe7, #91d6e9);
+  background: linear-gradient(to right, hsl(187, 55%, 79%), #b0d4df);
   /* Outras propriedades de estilo para o container */
 }
   .book-card {
+    background-color: #ade5b4;
     border: 1px solid #ddd;
     padding: 15px;
     margin: 10px;
