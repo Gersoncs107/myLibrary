@@ -74,6 +74,14 @@ function displayLibrary(){
         bookCard.appendChild(toggleReadButton)
 
         display.appendChild(bookCard)
+
+        const editButton = document.createElement("button")
+        editButton.textContent = 'Editar'
+        editButton.classList.add('edit-button')
+        editButton.addEventListener('click', () => {
+            editBook(index)
+        })
+        
     })
 }
 
