@@ -73,7 +73,7 @@ function displayLibrary(){
         })
         bookCard.appendChild(toggleReadButton)
 
-        display.appendChild(bookCard)
+        // display.appendChild(bookCard) retirado daqui
 
         const editButton = document.createElement("button")
         editButton.textContent = 'Editar'
@@ -81,7 +81,9 @@ function displayLibrary(){
         editButton.addEventListener('click', () => {
             editBook(index)
         })
-        
+        bookCard.appendChild(editButton)
+
+        display.appendChild(bookCard)
     })
 }
 
@@ -100,6 +102,36 @@ function loadLibrary(){
         }
     }
 }
+
+function editBook(index) {
+    const bookCard = document.querySelectorAll('.book-card')[index];
+    const inputs = bookCard.querySelectorAll('input');
+    const editButton = bookCard.querySelector('.edit-button');
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Salvar';
+    saveButton.classList.add('save-button');
+  
+    // Tornar os campos editáveis
+    inputs.forEach(input => {
+      input.disabled = false;
+    });
+  
+    // Substituir o botão "Editar" por "Salvar"
+    bookCard.replaceChild(saveButton, editButton);
+  
+    saveButton.addEventListener('click', () => {
+      // Atualizar os dados do livro
+      const titleInput = bookCard.querySelector('#title');
+      const authorInput = bookCard.querySelector('#author');
+      // ... outros inputs ...
+  
+      myLibrary[index].title = titleInput.value;
+      // ... atualizar outros campos ...
+  
+      saveLibrary();
+      displayLibrary();
+    });
+  }
 
 window.onload = function(){
     loadLibrary()
