@@ -49,11 +49,12 @@ body {
   }
   /* CSS Form */
   #main-header {
+    background-color: #5c6bc0;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 35%;
+    width: 30%;
     padding: 124px 54px 72px;
     box-sizing: border-box;
     background-position: left top;
