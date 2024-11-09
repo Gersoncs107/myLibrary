@@ -20,6 +20,7 @@ body {
   box-sizing: border-box;
 }
   .book-card {
+    display: grid;
     background-color: #ade5b4;
     border: 1px solid #ddd;
     padding: 15px;
