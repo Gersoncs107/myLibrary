@@ -113,7 +113,7 @@ function editBook(index) {
   
     // Tornar os campos editáveis
     inputs.forEach(input => {
-      input.disabled = false;
+      input.disabled = true;
     });
   
     // Substituir o botão "Editar" por "Salvar"
