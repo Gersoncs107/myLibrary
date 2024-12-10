@@ -13,12 +13,13 @@ body {
   }
   
 
-#container {
-  width: 65%;
-  margin-left: 35%;
-  padding: 124px 54px 72px;
-  box-sizing: border-box;
-}
+  #container {
+    max-width: 1200px; /* Define uma largura máxima */
+    margin: 0 auto; /* Centraliza o container */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
   .book-card {
     display: grid;
     background-color: #50a1b6;
@@ -50,17 +51,13 @@ body {
   }
   /* CSS Form */
   #main-header {
-    background-color: #5c6bc0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 30%;
-    padding: 120px 5px 20px 5px;
-    box-sizing: border-box;
-    background-position: left top;
-    background-size: auto, cover;
-}
+    background-color: #3f51b5;
+    color: rgb(15, 11, 11);
+    width: 100%;
+    padding: 20px;
+    position: relative;
+  }
+  
 /* Form Styles */
 form {
   max-width: 400px;
