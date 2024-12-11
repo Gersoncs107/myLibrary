@@ -30,6 +30,22 @@ form {
   background-color: #f9f9f9;
 }
 
+label {
+  font-size: 1rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+button[type="submit"] {
+  width: 100%; /* Botão ocupa toda a largura */
+  padding: 10px;
+}
+
 .book-card {
   background-color: #e3f2fd;
   border: 1px solid #90caf9;
