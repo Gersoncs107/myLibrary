@@ -95,7 +95,19 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  .book-card {
+  #main-header {
+    position: relative;
+    height: auto;
+    padding: 10px;
+  }
+
+  #container {
     width: 100%;
+    padding: 10px;
+  }
+
+  .book-card {
+    width: 100%; /* Os cards ocupam toda a largura */
   }
 }
+
