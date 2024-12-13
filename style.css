@@ -68,6 +68,13 @@ button[type="submit"] {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+.book-card p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
 button {
   font-size: 1rem;
   padding: 10px 15px;
