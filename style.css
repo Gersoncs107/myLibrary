@@ -41,6 +41,12 @@ input[type="number"] {
   font-size: 0.9rem;
 }
 
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2); /* Aumenta a área clicável */
+}
+
+
 button[type="submit"] {
   width: 100%; /* Botão ocupa toda a largura */
   padding: 10px;
