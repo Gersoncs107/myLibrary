@@ -11,25 +11,31 @@ function Book(title, author, pages, read){
     }
 }
 
-function addBookToLibrary(){
-   const title = document.getElementById('title').value
-   const author = document.getElementById('author').value
-   const pages = document.getElementById("pages").value
-   const read = document.getElementById("read").checked
-    
-   const newBook = new Book(title, author, pages, read)
-
-   myLibrary.push(newBook)
-   saveLibrary()
-   displayLibrary()
-
+function clearForm() {
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("pages").value = '';
     document.getElementById("read").checked = false;
+  }
 
-
-}
+  function addBookToLibrary() {
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").checked;
+  
+    if (!title || !author || !pages) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+  
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+  
+    saveLibrary();
+    displayLibrary();
+    clearForm();
+  }
 
 function displayLibrary(){
     const display = document.getElementById("libraryDisplay")
