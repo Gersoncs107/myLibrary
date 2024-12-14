@@ -91,17 +91,17 @@ function saveLibrary(){
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
-function loadLibrary(){
-    const storedLibrary = localStorage.getItem('myLibrary')
-    if(storedLibrary){
-        try{
-            // myLibrary = JSON.parse(storedLibrary)
-            myLibrary.push(...JSON.parse(storedLibrary))
-        }catch(error){
-            console.error('Erro ao carregar a biblioteca do localStorage:', error)
-        }
+function loadLibrary() {
+    const storedLibrary = localStorage.getItem('myLibrary');
+    if (storedLibrary) {
+      try {
+        myLibrary = JSON.parse(storedLibrary);
+      } catch (error) {
+        console.error('Erro ao carregar a biblioteca do localStorage:', error);
+      }
     }
-}
+  }
+  
 
 function editBook(index) {
     const bookCard = document.querySelectorAll('.book-card')[index];
