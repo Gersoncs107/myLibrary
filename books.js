@@ -1,154 +1,149 @@
-(function(){
-    let myLibrary = []
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-function Book(title, author, pages, read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.info = () => {
-        return `${title} by ${author}, ${pages} pages, ${read}`
+    toggleReadStatus() {
+        this.read = !this.read;
     }
 }
 
-function clearForm() {
-    document.getElementById("title").value = '';
-    document.getElementById("author").value = '';
-    document.getElementById("pages").value = '';
-    document.getElementById("read").checked = false;
-  }
+class Library {
+    constructor() {
+        this.books = [];
+    }
 
-  function addBookToLibrary() {
+    addBook(book) {
+        this.books.push(book);
+        this.saveLibrary();
+    }
+
+    removeBook(index) {
+        this.books.splice(index, 1);
+        this.saveLibrary();
+    }
+
+    saveLibrary() {
+        localStorage.setItem('myLibrary', JSON.stringify(this.books));
+    }
+
+    loadLibrary() {
+        const storedLibrary = localStorage.getItem('myLibrary');
+        if (storedLibrary) {
+            try {
+                const parsedBooks = JSON.parse(storedLibrary);
+                this.books = parsedBooks.map(book => new Book(book.title, book.author, book.pages, book.read));
+            } catch (error) {
+                console.error('Erro ao carregar a biblioteca:', error);
+            }
+        }
+    }
+
+    displayLibrary() {
+        const display = document.getElementById("libraryDisplay");
+        display.innerHTML = "";
+
+        this.books.forEach((book, index) => {
+            const bookCard = document.createElement("div");
+            bookCard.classList.add("book-card");
+
+            const title = document.createElement("p");
+            title.textContent = `Título: ${book.title}`;
+            bookCard.appendChild(title);
+
+            const author = document.createElement("p");
+            author.textContent = `Autor: ${book.author}`;
+            bookCard.appendChild(author);
+
+            const pages = document.createElement("p");
+            pages.textContent = `Páginas: ${book.pages}`;
+            bookCard.appendChild(pages);
+
+            const readStatus = document.createElement("p");
+            readStatus.textContent = `Lido: ${book.read ? 'Sim' : 'Não'}`;
+            bookCard.appendChild(readStatus);
+
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remover";
+            removeButton.addEventListener('click', () => {
+                this.removeBook(index);
+                this.displayLibrary();
+            });
+            bookCard.appendChild(removeButton);
+
+            const toggleReadButton = document.createElement("button");
+            toggleReadButton.textContent = "Alterar Status de Leitura";
+            toggleReadButton.addEventListener('click', () => {
+                book.toggleReadStatus();
+                this.saveLibrary();
+                this.displayLibrary();
+            });
+            bookCard.appendChild(toggleReadButton);
+
+            const editButton = document.createElement("button");
+            editButton.textContent = "Editar";
+            editButton.addEventListener('click', () => this.editBook(book, index));
+            bookCard.appendChild(editButton);
+
+            display.appendChild(bookCard);
+        });
+    }
+
+    editBook(book, index) {
+        const bookCard = document.querySelectorAll('.book-card')[index];
+        const form = document.createElement('form');
+
+        form.innerHTML = `
+            <label>Título: <input type="text" value="${book.title}" id="edit-title"></label>
+            <label>Autor: <input type="text" value="${book.author}" id="edit-author"></label>
+            <label>Páginas: <input type="number" value="${book.pages}" id="edit-pages"></label>
+            <label>Lido: <input type="checkbox" id="edit-read" ${book.read ? 'checked' : ''}></label>
+        `;
+
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Salvar';
+        saveButton.type = 'button';
+
+        saveButton.addEventListener('click', () => {
+            book.title = document.getElementById('edit-title').value;
+            book.author = document.getElementById('edit-author').value;
+            book.pages = document.getElementById('edit-pages').value;
+            book.read = document.getElementById('edit-read').checked;
+
+            this.saveLibrary();
+            this.displayLibrary();
+        });
+
+        form.appendChild(saveButton);
+        bookCard.innerHTML = '';
+        bookCard.appendChild(form);
+    }
+}
+
+const library = new Library();
+library.loadLibrary();
+library.displayLibrary();
+
+document.getElementById('bookForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
-    const pages = document.getElementById("pages").value;
-    const read = document.getElementById("read").checked;
-  
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+
     if (!title || !author || !pages) {
-      alert("Preencha todos os campos!");
-      return;
+        alert("Por favor, preencha todos os campos!");
+        return;
     }
-  
+
     const newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
-  
-    saveLibrary();
-    displayLibrary();
-    clearForm();
-  }
+    library.addBook(newBook);
+    library.displayLibrary();
 
-function displayLibrary(){
-    const display = document.getElementById("libraryDisplay")
-    display.innerHTML = ""
-
-    myLibrary.forEach( (book, index) => {
-        const bookCard = document.createElement("div")
-        bookCard.classList.add("book-card")
-
-        const title = document.createElement("p")
-        title.textContent = `Título: ${book.title}`
-        bookCard.appendChild(title)
-
-        const author = document.createElement("p")
-        author.textContent = `Autor: ${book.author}`
-        bookCard.appendChild(author)
-
-        const pages = document.createElement("p")
-        pages.textContent = `Páginas: ${book.pages}`
-        bookCard.appendChild(pages)
-
-        const readStatus = document.createElement("p")
-        readStatus.textContent = `Lido: ${book.read? 'sim' : 'não'}`
-        bookCard.appendChild(readStatus)
-
-        const removeButton = document.createElement("button")
-        removeButton.textContent = "Remover"
-        removeButton.addEventListener('click', () => {
-            myLibrary.splice(index, 1)
-            saveLibrary()
-            displayLibrary()
-        })
-        bookCard.appendChild(removeButton)
-
-        const toggleReadButton = document.createElement("button")
-        toggleReadButton.textContent = "Alterar status da leitura"
-        toggleReadButton.addEventListener("click", () => {
-            book.read = ! book.read
-            saveLibrary()
-            displayLibrary()
-        })
-        bookCard.appendChild(toggleReadButton)
-
-        // display.appendChild(bookCard) retirado daqui
-
-        const editButton = document.createElement("button")
-        editButton.textContent = 'Editar'
-        editButton.classList.add('edit-button')
-        editButton.addEventListener('click', () => {
-            editBook(index)
-        })
-        bookCard.appendChild(editButton)
-
-        display.appendChild(bookCard)
-    })
-}
-
-function saveLibrary(){
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
-}
-
-function loadLibrary() {
-    const storedLibrary = localStorage.getItem('myLibrary');
-    if (storedLibrary) {
-      try {
-        myLibrary = JSON.parse(storedLibrary);
-      } catch (error) {
-        console.error('Erro ao carregar a biblioteca do localStorage:', error);
-      }
-    }
-  }
-  
-
-function editBook(index) {
-    const bookCard = document.querySelectorAll('.book-card')[index];
-    const inputs = bookCard.querySelectorAll('input');
-    const editButton = bookCard.querySelector('.edit-button');
-    const saveButton = document.createElement('button');
-    saveButton.textContent = 'Salvar';
-    saveButton.classList.add('save-button');
-  
-    // Tornar os campos editáveis
-    inputs.forEach(input => {
-      input.disabled = true;
-    });
-  
-    // Substituir o botão "Editar" por "Salvar"
-    bookCard.replaceChild(saveButton, editButton);
-  
-    saveButton.addEventListener('click', () => {
-      // Atualizar os dados do livro
-      const titleInput = bookCard.querySelector('#title');
-      const authorInput = bookCard.querySelector('#author');
-      // ... outros inputs ...
-  
-      myLibrary[index].title = titleInput.value;
-      // ... atualizar outros campos ...
-  
-      saveLibrary();
-      displayLibrary();
-    });
-  }
-
-window.onload = function(){
-    loadLibrary()
-    displayLibrary()
-}
-
-
-const button = document.getElementById('btn')
-button.addEventListener('click', addBookToLibrary)
-
-
-console.log(myLibrary)
-})();
-
+    // Limpar formulário
+    document.getElementById('bookForm').reset();
+});
