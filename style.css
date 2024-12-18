@@ -33,6 +33,12 @@ form {
   background-color: #fff;
 }
 
+form div {
+  display: flex;
+  align-items: center; /* Alinha label e input verticalmente */
+  gap: 10px; /* Espaçamento entre label e input */
+}
+
 label {
   font-size: 1rem;
   color: #333;
