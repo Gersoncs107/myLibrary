@@ -22,6 +22,9 @@ body {
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento entre as linhas do formulário */
   max-width: 400px;
   margin: 20px auto;
   padding: 20px;
